@@ -67,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_start_location_updates)
     Button btnStartUpdates;
 
-    @BindView(R.id.btn_stop_location_updates)
-    Button btnStopUpdates;
-
     // location last updated time
     private String mLastUpdateTime;
 
@@ -191,11 +188,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void toggleButtons() {
         if (mRequestingLocationUpdates) {
-            btnStartUpdates.setEnabled(false);
-            btnStopUpdates.setEnabled(true);
+            btnStartUpdates.setText(getString(R.string.stop_updates));
         } else {
-            btnStartUpdates.setEnabled(true);
-            btnStopUpdates.setEnabled(false);
+            btnStartUpdates.setText(getString(R.string.start_updates));
         }
     }
 
@@ -254,36 +249,35 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_start_location_updates)
     public void startLocationButtonClick() {
-        // Requesting ACCESS_FINE_LOCATION using Dexter library
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        mRequestingLocationUpdates = true;
-                        startLocationUpdates();
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            // open device settings when the permission is
-                            // denied permanently
-                            openSettings();
+        if (mRequestingLocationUpdates) {
+            mRequestingLocationUpdates = false;
+            stopLocationUpdates();
+        } else {
+            // Requesting ACCESS_FINE_LOCATION using Dexter library
+            Dexter.withActivity(this)
+                    .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            mRequestingLocationUpdates = true;
+                            startLocationUpdates();
                         }
-                    }
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
-    }
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            if (response.isPermanentlyDenied()) {
+                                // open device settings when the permission is
+                                // denied permanently
+                                openSettings();
+                            }
+                        }
 
-    @OnClick(R.id.btn_stop_location_updates)
-    public void stopLocationButtonClick() {
-        mRequestingLocationUpdates = false;
-        stopLocationUpdates();
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                            token.continuePermissionRequest();
+                        }
+                    }).check();
+        }
     }
 
     public void stopLocationUpdates() {
@@ -297,16 +291,6 @@ public class MainActivity extends AppCompatActivity {
                         toggleButtons();
                     }
                 });
-    }
-
-    @OnClick(R.id.btn_get_last_location)
-    public void showLastKnownLocation() {
-        if (mCurrentLocation != null) {
-            Toast.makeText(getApplicationContext(), "Lat: " + mCurrentLocation.getLatitude()
-                    + ", Lng: " + mCurrentLocation.getLongitude(), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "Last known location is not available!", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
