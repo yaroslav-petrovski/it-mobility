@@ -11,6 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".SelectMethod"></activity>
         <activity
                 android:name=".MainActivity"
                 android:screenOrientation="portrait">
