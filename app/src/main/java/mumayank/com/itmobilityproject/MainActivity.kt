@@ -4,6 +4,7 @@ import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,11 +42,6 @@ class MainActivity : AppCompatActivity() {
 
         progressBar.visibility = View.GONE
 
-        button2.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
-            airLocation.start()
-        }
-
         button3.setOnClickListener {
             val intent = Intent(this, SelectMethod::class.java)
             startActivity(intent)
@@ -68,12 +64,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
         menuInflater.inflate(R.menu.my_menu, menu)
         val search = menu.findItem(R.id.search)
         val searchView = search.actionView as SearchView
         searchView.queryHint = "Your city..."
 
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //return super.onOptionsItemSelected(item)
+        return when (item.itemId){
+            R.id.location_search -> {
+                progressBar.visibility = View.VISIBLE
+                airLocation.start()
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
