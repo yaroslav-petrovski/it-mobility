@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
             airLocation.start()
         }
 
+        button3.setOnClickListener {
+            val intent = Intent(this, SelectMethod::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
