@@ -1,4 +1,4 @@
-package mumayank.com.airlocationproject;
+package mumayank.com.itmobilityproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,6 +1,5 @@
-package mumayank.com.airlocationproject
+package mumayank.com.itmobilityproject
 
-//import android.R
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle

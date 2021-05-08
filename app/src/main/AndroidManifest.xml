@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        package="mumayank.com.airlocationproject">
+        package="mumayank.com.itmobilityproject">
 
     <application
             android:allowBackup="true"
@@ -11,9 +11,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".SelectMethod"></activity>
+        <activity android:name="mumayank.com.itmobilityproject.SelectMethod"></activity>
         <activity
-                android:name=".MainActivity"
+                android:name="mumayank.com.itmobilityproject.MainActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
