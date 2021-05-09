@@ -1,0 +1,89 @@
+package mumayank.com.itmobilityproject
+
+import android.content.Intent
+import android.location.Location
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.SearchView
+import kotlinx.android.synthetic.main.main_activity.*
+import mumayank.com.airlocationlibrary.AirLocation
+import java.util.*
+
+
+//using AirLocation library: https://github.com/mumayank/AirLocation
+
+class MainActivity : AppCompatActivity() {
+
+    private val airLocation = AirLocation(this, object : AirLocation.Callback {
+        override fun onSuccess(locations: ArrayList<Location>) {
+            progressBar.visibility = View.GONE
+            var string = "\n"
+            for (location in locations) {
+                string = "${location.longitude}, ${location.latitude}\n$string"
+            }
+            string = "$string${textView2.text}"
+            textView2.text = string
+        }
+
+        override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
+            progressBar.visibility = View.GONE
+            Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
+                .show()
+        }
+    }, isLocationRequiredOnlyOneTime = true)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main_activity)
+
+        progressBar.visibility = View.GONE
+
+        button3.setOnClickListener {
+            val intent = Intent(this, SelectMethod::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        airLocation.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.my_menu, menu)
+        val search = menu.findItem(R.id.search)
+        val searchView = search.actionView as SearchView
+        searchView.queryHint = "Your city..."
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //return super.onOptionsItemSelected(item)
+        return when (item.itemId){
+            R.id.location_search -> {
+                progressBar.visibility = View.VISIBLE
+                airLocation.start()
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+}
