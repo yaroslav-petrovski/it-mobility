@@ -21,11 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
         override fun onSuccess(locations: ArrayList<Location>) {
             progressBar.visibility = View.GONE
-            var string = "\n"
-            for (location in locations) {
-                string = "${location.longitude}, ${location.latitude}\n$string"
-            }
-            string = "$string${textView2.text}"
+            val string = "${locations.last().longitude}, ${locations.last().latitude}"
             textView2.text = string
         }
 
@@ -34,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
         }
-    }, isLocationRequiredOnlyOneTime = true)
+    }/*, isLocationRequiredOnlyOneTime = true*/)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
