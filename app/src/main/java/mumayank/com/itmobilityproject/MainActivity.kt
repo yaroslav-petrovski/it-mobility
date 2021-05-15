@@ -1,6 +1,7 @@
 package mumayank.com.itmobilityproject
 
 import android.content.Intent
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
@@ -18,10 +19,20 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    //VARIABLES:
+    var lat = 0.0
+    var long = 0.0
+    val geocoder = Geocoder(this)
+
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
         override fun onSuccess(locations: ArrayList<Location>) {
             progressBar.visibility = View.GONE
-            val string = "${locations.last().longitude}, ${locations.last().latitude}"
+            var string = "${locations.last().longitude}, ${locations.last().latitude}"
+            textView2.text = string
+
+            lat = locations.last().latitude.toDouble()
+            long = locations.last().longitude.toDouble()
+            string = geocoder.getFromLocation(lat, long, 1)[0].locality
             textView2.text = string
         }
 
@@ -32,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         }
     }/*, isLocationRequiredOnlyOneTime = true*/)
 
+
+    //FUNCTIONS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
