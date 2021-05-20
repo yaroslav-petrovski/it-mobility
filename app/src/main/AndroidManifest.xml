@@ -11,9 +11,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="mumayank.com.itmobilityproject.SelectMethod"></activity>
+        <activity android:name=".StartActivity"></activity>
         <activity
-                android:name="mumayank.com.itmobilityproject.MainActivity"
+                android:name=".MainActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

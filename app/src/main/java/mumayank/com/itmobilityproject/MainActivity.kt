@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.GONE
 
         button3.setOnClickListener {
-            val intent = Intent(this, SelectMethod::class.java)
+            val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
         }
 
