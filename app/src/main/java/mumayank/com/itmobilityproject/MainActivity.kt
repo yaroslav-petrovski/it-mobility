@@ -49,13 +49,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        progressBar.visibility = View.GONE
+        //progressBar.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+        airLocation.start()
 
         button3.setOnClickListener {
             val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    /*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //return super.onOptionsItemSelected(item)
         return when (item.itemId){
@@ -90,9 +92,9 @@ class MainActivity : AppCompatActivity() {
                 airLocation.start()
                 return true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
+    */
 
 }

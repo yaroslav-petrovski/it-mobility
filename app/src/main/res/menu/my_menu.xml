@@ -8,9 +8,11 @@
             app:showAsAction="collapseActionView|ifRoom"
             app:actionViewClass="android.widget.SearchView" />
 
+    <!--
     <item android:id="@+id/location_search"
             android:title="LocationSearch"
             android:icon="@drawable/ic_location_searching"
             app:showAsAction="collapseActionView|ifRoom" />
+    -->
 
 </menu>
