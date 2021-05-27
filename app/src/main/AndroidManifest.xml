@@ -11,6 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ResultActivity"></activity>
         <activity android:name=".SelectCityActivity" />
         <activity android:name=".QrScanActivity" />
         <activity android:name=".StartActivity" />
