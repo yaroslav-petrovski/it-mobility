@@ -13,6 +13,7 @@ import android.widget.SearchView
 import kotlinx.android.synthetic.main.main_activity.*
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.*
+import kotlin.concurrent.schedule
 
 
 //using AirLocation library: https://github.com/mumayank/AirLocation
@@ -50,6 +51,11 @@ class MainActivity : AppCompatActivity() {
 
         //progressBar.visibility = View.VISIBLE
         airLocation.start()
+
+        val intent = Intent(this, StartActivity::class.java)
+        Timer("nextAct", false).schedule(3000){
+            startActivity(intent)
+        }
 
         /*
         button3.setOnClickListener {
