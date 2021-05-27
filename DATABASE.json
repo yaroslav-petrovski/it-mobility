@@ -1,0 +1,16 @@
+{
+  "cities": {
+    "Offenbach am Main": {
+      "Supermarket": {
+        "Bieberer Straﬂe 225": {
+          "lat": 50.09772570604128,
+          "lon": 8.790027337937905,
+          "Products": {
+            "Toaster": 5,
+            "Mikrowelle": 2
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ import android.widget.SearchView
 import kotlinx.android.synthetic.main.main_activity.*
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.*
+import kotlin.concurrent.schedule
 
 
 //using AirLocation library: https://github.com/mumayank/AirLocation
@@ -26,18 +27,17 @@ class MainActivity : AppCompatActivity() {
 
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
         override fun onSuccess(locations: ArrayList<Location>) {
-            progressBar.visibility = View.GONE
-            var string = "${locations.last().longitude}, ${locations.last().latitude}"
-            textView2.text = string
+            //progressBar.visibility = View.GONE
 
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
-            string = geocoder.getFromLocation(lat, long, 1)[0].locality
-            textView2.text = string
+            var string = geocoder.getFromLocation(lat, long, 1)[0].locality
+            //textView2.text = string
+            println(string)
         }
 
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
-            progressBar.visibility = View.GONE
+            //progressBar.visibility = View.GONE
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
         }
@@ -49,12 +49,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        progressBar.visibility = View.GONE
+        //progressBar.visibility = View.VISIBLE
+        airLocation.start()
 
+        val intent = Intent(this, StartActivity::class.java)
+        Timer("nextAct", false).schedule(3000){
+            startActivity(intent)
+        }
+
+        /*
         button3.setOnClickListener {
             val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
         }
+        */
 
     }
 
@@ -72,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    /*
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
         menuInflater.inflate(R.menu.my_menu, menu)
@@ -81,7 +90,9 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+    */
 
+    /*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //return super.onOptionsItemSelected(item)
         return when (item.itemId){
@@ -90,9 +101,9 @@ class MainActivity : AppCompatActivity() {
                 airLocation.start()
                 return true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
+    */
 
 }
