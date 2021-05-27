@@ -26,18 +26,17 @@ class MainActivity : AppCompatActivity() {
 
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
         override fun onSuccess(locations: ArrayList<Location>) {
-            progressBar.visibility = View.GONE
-            var string = "${locations.last().longitude}, ${locations.last().latitude}"
-            textView2.text = string
+            //progressBar.visibility = View.GONE
 
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
-            string = geocoder.getFromLocation(lat, long, 1)[0].locality
-            textView2.text = string
+            var string = geocoder.getFromLocation(lat, long, 1)[0].locality
+            //textView2.text = string
+            println(string)
         }
 
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
-            progressBar.visibility = View.GONE
+            //progressBar.visibility = View.GONE
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
         }
@@ -49,14 +48,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        //progressBar.visibility = View.GONE
-        progressBar.visibility = View.VISIBLE
+        //progressBar.visibility = View.VISIBLE
         airLocation.start()
 
+        /*
         button3.setOnClickListener {
             val intent = Intent(this, StartActivity::class.java)
             startActivity(intent)
         }
+        */
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    /*
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
         menuInflater.inflate(R.menu.my_menu, menu)
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+    */
 
     /*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
