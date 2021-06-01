@@ -7,7 +7,26 @@
           "lon": 8.790027337937905,
           "Products": {
             "Toaster": 5,
-            "Mikrowelle": 2
+            "Mikrowelle": 2,
+            "Wasserkocher": 0
+          }
+        }
+        "Rowentastr. 10": {
+          "lat": 50.08861459971199, 
+          "lon": 8.77543411014347,
+          "Products": {
+            "Toaster": 2,
+            "Mikrowelle": 4,
+            "Wasserkocher": 5
+          }
+        }
+    "Merianstr. 22": {
+          "lat": 50.08663165673927,  
+          "lon": 8.747289635970883,
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 2,
+            "Wasserkocher": 2
           }
         }
       }
