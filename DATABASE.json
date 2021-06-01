@@ -11,10 +11,10 @@
             "Wasserkocher": 0
           }
         }
-      }}}
+      }}
   
   
-    "cities": {
+    
     "Offenbach am Main": {
       "Supermarket": {
         "Merianstr. 22": {
@@ -28,7 +28,7 @@
         }
       }}}
   
-      "cities": {
+      
     "Offenbach am Main": {
       "Supermarket": {
         "Rowentastr. 10": {
@@ -44,7 +44,7 @@
   
   
   
-  
+}
   
 }
   
