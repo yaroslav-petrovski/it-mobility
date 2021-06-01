@@ -11,46 +11,40 @@
             "Wasserkocher": 0
           }
         }
-        "Rowentastr. 10": {
-          "lat": 50.08861459971199, 
-          "lon": 8.77543411014347,
+      }}};
+  
+  
+    "cities": {
+    "Offenbach am Main": {
+      "Supermarket": {
+        "Merianstr. 22": {
+          "lat": 50.08738718685338, 
+          "lon": 8.746900298796353
           "Products": {
             "Toaster": 2,
-            "Mikrowelle": 4,
-            "Wasserkocher": 5
-          }
-        }
-    "Merianstr. 22": {
-          "lat": 50.08663165673927,  
-          "lon": 8.747289635970883,
-          "Products": {
-            "Toaster": 1,
-            "Mikrowelle": 2,
+            "Mikrowelle": 1,
             "Wasserkocher": 2
           }
         }
-      }
-    }
-    /*"Frankfurt am Main" : {"Supermarket": {
-        "Bieberer Straße 225": {
-          "lat": 50.09772570604128,
-          "lon": 8.790027337937905,
-          "Products": {
-            "Toaster": 5,
-            "Mikrowelle": 2
-          }
-        }
-      }}*/
+      }}};
   
- /* "Bad Homburg": {"Supermarket": {
-        "Bieberer Straße 225": {
-          "lat": 50.09772570604128,
-          "lon": 8.790027337937905,
+      "cities": {
+    "Offenbach am Main": {
+      "Supermarket": {
+        "Rowentastr. 10": {
+          "lat": 50.08829170215546, 
+          "lon": 8.773850101575954
           "Products": {
-            "Toaster": 5,
-            "Mikrowelle": 2
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
           }
         }
-      }}*/
-  }
+      }}};
+  
+  
+  
+  
+  
 }
+  
