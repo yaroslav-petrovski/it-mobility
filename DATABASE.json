@@ -2,7 +2,7 @@
   "cities": {
     "Offenbach am Main": {
       "Supermarket": {
-        "Bieberer Stra�e 225": {
+        "Bieberer Straße 225": {
           "lat": 50.09772570604128,
           "lon": 8.790027337937905,
           "Products": {
@@ -12,5 +12,26 @@
         }
       }
     }
+    /*"Frankfurt am Main" : {"Supermarket": {
+        "Bieberer Straße 225": {
+          "lat": 50.09772570604128,
+          "lon": 8.790027337937905,
+          "Products": {
+            "Toaster": 5,
+            "Mikrowelle": 2
+          }
+        }
+      }}*/
+  
+ /* "Bad Homburg": {"Supermarket": {
+        "Bieberer Straße 225": {
+          "lat": 50.09772570604128,
+          "lon": 8.790027337937905,
+          "Products": {
+            "Toaster": 5,
+            "Mikrowelle": 2
+          }
+        }
+      }}*/
   }
 }
