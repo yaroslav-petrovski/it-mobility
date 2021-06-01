@@ -40,11 +40,90 @@
             "Wasserkocher": 4
           }
         }
-      }}}
+      }}},
   
+    "cities": {
+    "Frankfurt am Main": {
+      "Supermarket": {
+        "Oeserstr. 155": {
+          "lat": 50.10807353096075, 
+          "lon": 8.587274733141927,
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }
+      }}},
   
+  "cities": {
+    "Frankfurt am Main": {
+      "Supermarket": {
+        "Offenbacher Landstr. 53": {
+          "lat": 50.10240961275861, 
+          "lon": 8.697310371215961,
+          "Products": {
+            "Toaster": 6,
+            "Mikrowelle": 2,
+            "Wasserkocher": 1
+          }
+        }
+      }}},
   
+  "cities": {
+    "Frankfurt am Main": {
+      "Supermarket": {
+        "Friedberger Landstr. 298": {
+          "lat": 50.133244524148026, 
+          "lon": 8.696032844229324, 
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }
+      }}},
+      "cities": {
+    "Darmstadt": {
+      "Supermarket": {
+        "Gräfenhäuser Str. 44": {
+          "lat": 49.886048996978374,  
+          "lon": 8.634283100043799,
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }
+      }}},
   
+  "cities": {
+    "Darmstadt": {
+      "Supermarket": {
+        "Eschollbrücker Str. 39": {
+          "lat": 49.85813329661581, 
+          "lon": 8.631787138676568, 
+          "Products": {
+            "Toaster": 6,
+            "Mikrowelle": 2,
+            "Wasserkocher": 1
+          }
+        }
+      }}},
+  
+  "cities": {
+    "Darmstadt": {
+      "Supermarket": {
+        "Jägertorstr. 250": {
+          "lat": 49.89543760650274, 
+          "lon": 8.677798596348632, 
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }
+      }}},
   
 }
   
