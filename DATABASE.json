@@ -1,6 +1,6 @@
 {
-  "cities": {
-    "Offenbach am Main": {
+  "cities":
+  {"Offenbach am Main": {
       "Supermarket": {
         "Bieberer Straße 225": {
           "lat": 50.09772570604128,
@@ -38,7 +38,7 @@
         }
 }  }},
   
-{  "Frankfurt am Main": {
+ {"Frankfurt am Main": {
       "Supermarket": {
         "Oeserstr. 155": {
           "lat": 50.10807353096075, 
@@ -117,4 +117,4 @@
         }
 }}},
   
-}}
+}
