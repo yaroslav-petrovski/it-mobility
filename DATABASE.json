@@ -10,7 +10,7 @@
             "Mikrowelle": 2,
             "Wasserkocher": 0
           }
-        }},
+        }}
       
     
     
@@ -23,7 +23,7 @@
             "Mikrowelle": 1,
             "Wasserkocher": 2
           }
-  }},
+  }}
   
   
      
@@ -36,7 +36,7 @@
             "Wasserkocher": 4
           }
         }
-}  },
+}  }},
   
  {"Frankfurt am Main": {
       "Supermarket": {
@@ -48,7 +48,7 @@
             "Mikrowelle": 3,
             "Wasserkocher": 4
           }
-        }},
+        }}
       
   
   
@@ -63,7 +63,7 @@
             "Wasserkocher": 1
           }
         
-} },
+} }
   
  
    
@@ -76,7 +76,7 @@
             "Wasserkocher": 4
           }
         }
-      }},
+      }}},
   
 {  "Darmstadt": {
       "Supermarket": {
@@ -88,8 +88,8 @@
             "Mikrowelle": 3,
             "Wasserkocher": 4
           }
-        },
-  
+        }}
+ 
  
  
   
@@ -102,7 +102,7 @@
             "Wasserkocher": 1
           }
         
-}},
+}}
   
  
     
@@ -115,7 +115,6 @@
             "Wasserkocher": 4
           }
         }
-}},
+}}},
   
-}}
-
+}
