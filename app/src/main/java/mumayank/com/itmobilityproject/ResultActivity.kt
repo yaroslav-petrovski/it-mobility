@@ -14,7 +14,7 @@ class ResultActivity : AppCompatActivity() {
     var productName = "Mikrowelle"
 
     // List to store results
-    var shops = mutableListOf<String>()
+    var shops = mutableListOf<ResultItem>()
 
     // DB connection
     private lateinit var database: FirebaseDatabase
@@ -42,7 +42,8 @@ class ResultActivity : AppCompatActivity() {
                 if (snapshot.hasChild(cityName)) {
                     // Store shops in th list
                     snapshot.child(cityName).children.first().children.forEach {
-                        shops.add(it.key.toString())
+                        val productCnt = it.child("Products").child(productName).value.toString().toInt()
+                        shops.add(ResultItem(it.key.toString(), productCnt))
                     }
                 } else {
                     println("CHILD DOES NOT EXIST")
@@ -56,7 +57,9 @@ class ResultActivity : AppCompatActivity() {
                 // Show Shops in th listview
                 val arrayAdapter: ArrayAdapter<*>
                 var mListView = findViewById<ListView>(R.id.results_list)
-                arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, shops)
+                shops.sortWith(compareByDescending { it.cntProducts })
+                //arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, shops)
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
                 mListView.adapter = arrayAdapter
             }
 
