@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     var lat = 0.0
     var long = 0.0
     val geocoder = Geocoder(this)
+    var cityName = "NaN"
 
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
         override fun onSuccess(locations: ArrayList<Location>) {
@@ -31,9 +32,8 @@ class MainActivity : AppCompatActivity() {
 
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
-            var string = geocoder.getFromLocation(lat, long, 1)[0].locality
-            //textView2.text = string
-            println(string)
+            cityName = geocoder.getFromLocation(lat, long, 1)[0].locality
+            println(cityName)
         }
 
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
@@ -52,8 +52,16 @@ class MainActivity : AppCompatActivity() {
         //progressBar.visibility = View.VISIBLE
         airLocation.start()
 
-        val intent = Intent(this, StartActivity::class.java)
+        val intent = Intent(this, ResultActivity::class.java)
+        //intent.putExtra("City", "Darmstadt")
         Timer("nextAct", false).schedule(3000){
+            /*if (cityName == "NaN")
+                Timer("nextAct", false).schedule(3000){
+                    //DO NOTHING
+                    intent.putExtra("City",cityName)
+                }*/
+            intent.putExtra("City", cityName)
+            println("TEST IN MAIN: " + intent.getStringExtra("City"))
             startActivity(intent)
         }
 
