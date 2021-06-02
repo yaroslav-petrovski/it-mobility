@@ -36,7 +36,7 @@
             "Wasserkocher": 4
           }
         }
-}  }},
+}  },
   
  {"Frankfurt am Main": {
       "Supermarket": {
@@ -76,7 +76,7 @@
             "Wasserkocher": 4
           }
         }
-      }}},
+      }},
   
 {  "Darmstadt": {
       "Supermarket": {
@@ -88,7 +88,7 @@
             "Mikrowelle": 3,
             "Wasserkocher": 4
           }
-        }},
+        },
   
  
  
@@ -115,6 +115,7 @@
             "Wasserkocher": 4
           }
         }
-}}},
+}},
   
 }}
+
