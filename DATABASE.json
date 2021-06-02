@@ -14,7 +14,6 @@
       }}},
   
   
-    "cities": {
     "Offenbach am Main": {
       "Supermarket": {
         "Merianstr. 22": {
@@ -25,10 +24,9 @@
             "Mikrowelle": 1,
             "Wasserkocher": 2
           }
-        }
       }}},
   
-      "cities": {
+    
     "Offenbach am Main": {
       "Supermarket": {
         "Rowentastr. 10": {
@@ -40,10 +38,9 @@
             "Wasserkocher": 4
           }
         }
-      }}},
+      }},
   
-    "cities": {
-    "Frankfurt am Main": {
+       "Frankfurt am Main": {
       "Supermarket": {
         "Oeserstr. 155": {
           "lat": 50.10807353096075, 
@@ -54,9 +51,9 @@
             "Wasserkocher": 4
           }
         }
-      }}},
+      }},
   
-  "cities": {
+  
     "Frankfurt am Main": {
       "Supermarket": {
         "Offenbacher Landstr. 53": {
@@ -68,9 +65,9 @@
             "Wasserkocher": 1
           }
         }
-      }}},
+      }},
   
-  "cities": {
+ 
     "Frankfurt am Main": {
       "Supermarket": {
         "Friedberger Landstr. 298": {
@@ -82,8 +79,8 @@
             "Wasserkocher": 4
           }
         }
-      }}},
-      "cities": {
+      }},
+  
     "Darmstadt": {
       "Supermarket": {
         "Gräfenhäuser Str. 44": {
@@ -95,9 +92,9 @@
             "Wasserkocher": 4
           }
         }
-      }}},
+      }},
   
-  "cities": {
+ 
     "Darmstadt": {
       "Supermarket": {
         "Eschollbrücker Str. 39": {
@@ -109,9 +106,9 @@
             "Wasserkocher": 1
           }
         }
-      }}},
+      }},
   
-  "cities": {
+ 
     "Darmstadt": {
       "Supermarket": {
         "Jägertorstr. 250": {
@@ -123,7 +120,7 @@
             "Wasserkocher": 4
           }
         }
-      }}},
+      }},
   
 }
   
