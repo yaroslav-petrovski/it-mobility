@@ -1,16 +1,120 @@
 {
-  "cities": {
-    "Offenbach am Main": {
+  "cities":
+  {"Offenbach am Main": {
       "Supermarket": {
-        "Bieberer Stra�e 225": {
+        "Bieberer Straße 225": {
           "lat": 50.09772570604128,
           "lon": 8.790027337937905,
           "Products": {
             "Toaster": 5,
-            "Mikrowelle": 2
+            "Mikrowelle": 2,
+            "Wasserkocher": 0
+          }
+        }}
+      
+    
+    
+
+      { "Merianstr. 22": {
+          "lat": 50.08738718685338, 
+          "lon": 8.746900298796353,
+          "Products": {
+            "Toaster": 2,
+            "Mikrowelle": 1,
+            "Wasserkocher": 2
+          }
+  }}
+  
+  
+     
+{   "Rowentastr. 10": {
+          "lat": 50.08829170215546, 
+          "lon": 8.773850101575954,
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
           }
         }
-      }
-    }
-  }
+}  }}
+  
+ { "Frankfurt am Main": {
+      "Supermarket": {
+        "Oeserstr. 155": {
+          "lat": 50.10807353096075, 
+          "lon": 8.587274733141927,
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }}
+      
+  
+  
+ 
+      
+  { "Offenbacher Landstr. 53": {
+          "lat": 50.10240961275861, 
+          "lon": 8.697310371215961,
+          "Products": {
+            "Toaster": 6,
+            "Mikrowelle": 2,
+            "Wasserkocher": 1
+          }
+        
+} }
+  
+ 
+   
+{"Friedberger Landstr. 298": {
+          "lat": 50.133244524148026, 
+          "lon": 8.696032844229324, 
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }
+      }}}
+  
+{  "Darmstadt": {
+      "Supermarket": {
+        "Gräfenhäuser Str. 44": {
+          "lat": 49.886048996978374,  
+          "lon": 8.634283100043799,
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }}
+ 
+ 
+ 
+  
+  {  "Eschollbrücker Str. 39": {
+          "lat": 49.85813329661581, 
+          "lon": 8.631787138676568, 
+          "Products": {
+            "Toaster": 6,
+            "Mikrowelle": 2,
+            "Wasserkocher": 1
+          }
+        
+}}
+  
+ 
+    
+{   "Jägertorstr. 250": {
+          "lat": 49.89543760650274, 
+          "lon": 8.677798596348632, 
+          "Products": {
+            "Toaster": 1,
+            "Mikrowelle": 3,
+            "Wasserkocher": 4
+          }
+        }
+}}}
+  
 }
