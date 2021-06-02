@@ -10,12 +10,12 @@
             "Mikrowelle": 2,
             "Wasserkocher": 0
           }
-        },
+        }},
       
     
     
 
-        "Merianstr. 22": {
+      { "Merianstr. 22": {
           "lat": 50.08738718685338, 
           "lon": 8.746900298796353,
           "Products": {
@@ -23,11 +23,11 @@
             "Mikrowelle": 1,
             "Wasserkocher": 2
           }
-      },
+  }},
   
   
      
-        "Rowentastr. 10": {
+{   "Rowentastr. 10": {
           "lat": 50.08829170215546, 
           "lon": 8.773850101575954,
           "Products": {
@@ -36,9 +36,9 @@
             "Wasserkocher": 4
           }
         }
-      }},
+}  }},
   
-       "Frankfurt am Main": {
+{  "Frankfurt am Main": {
       "Supermarket": {
         "Oeserstr. 155": {
           "lat": 50.10807353096075, 
@@ -48,13 +48,13 @@
             "Mikrowelle": 3,
             "Wasserkocher": 4
           }
-        },
+        }},
       
   
   
  
       
-        "Offenbacher Landstr. 53": {
+  { "Offenbacher Landstr. 53": {
           "lat": 50.10240961275861, 
           "lon": 8.697310371215961,
           "Products": {
@@ -63,11 +63,11 @@
             "Wasserkocher": 1
           }
         
-      },
+} },
   
  
    
-        "Friedberger Landstr. 298": {
+{"Friedberger Landstr. 298": {
           "lat": 50.133244524148026, 
           "lon": 8.696032844229324, 
           "Products": {
@@ -76,9 +76,9 @@
             "Wasserkocher": 4
           }
         }
-      }},
+      }}},
   
-    "Darmstadt": {
+{  "Darmstadt": {
       "Supermarket": {
         "Gräfenhäuser Str. 44": {
           "lat": 49.886048996978374,  
@@ -88,12 +88,12 @@
             "Mikrowelle": 3,
             "Wasserkocher": 4
           }
-      },
+        }},
   
  
  
   
-        "Eschollbrücker Str. 39": {
+  {  "Eschollbrücker Str. 39": {
           "lat": 49.85813329661581, 
           "lon": 8.631787138676568, 
           "Products": {
@@ -102,11 +102,11 @@
             "Wasserkocher": 1
           }
         
-      },
+}},
   
  
     
-        "Jägertorstr. 250": {
+{   "Jägertorstr. 250": {
           "lat": 49.89543760650274, 
           "lon": 8.677798596348632, 
           "Products": {
@@ -115,6 +115,6 @@
             "Wasserkocher": 4
           }
         }
-      }},
+}}},
   
 }}
