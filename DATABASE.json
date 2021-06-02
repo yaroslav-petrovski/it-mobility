@@ -11,11 +11,10 @@
             "Wasserkocher": 0
           }
         }
-      }
-  
-  
+      
     
-      "Supermarket": {
+    
+
         "Merianstr. 22": {
           "lat": 50.08738718685338, 
           "lon": 8.746900298796353,
@@ -24,10 +23,10 @@
             "Mikrowelle": 1,
             "Wasserkocher": 2
           }
-      }}
+      }
   
   
-      "Supermarket": {
+     
         "Rowentastr. 10": {
           "lat": 50.08829170215546, 
           "lon": 8.773850101575954,
@@ -50,11 +49,11 @@
             "Wasserkocher": 4
           }
         }
-      }
+      
   
   
  
-      "Supermarket": {
+      
         "Offenbacher Landstr. 53": {
           "lat": 50.10240961275861, 
           "lon": 8.697310371215961,
@@ -63,12 +62,11 @@
             "Mikrowelle": 2,
             "Wasserkocher": 1
           }
-        }
+        
       }
   
  
    
-      "Supermarket": {
         "Friedberger Landstr. 298": {
           "lat": 50.133244524148026, 
           "lon": 8.696032844229324, 
@@ -90,12 +88,11 @@
             "Mikrowelle": 3,
             "Wasserkocher": 4
           }
-        }
       }
   
  
  
-      "Supermarket": {
+  
         "Eschollbrücker Str. 39": {
           "lat": 49.85813329661581, 
           "lon": 8.631787138676568, 
@@ -104,12 +101,11 @@
             "Mikrowelle": 2,
             "Wasserkocher": 1
           }
-        }
+        
       }
   
  
     
-      "Supermarket": {
         "Jägertorstr. 250": {
           "lat": 49.89543760650274, 
           "lon": 8.677798596348632, 
