@@ -52,25 +52,12 @@ class MainActivity : AppCompatActivity() {
         //progressBar.visibility = View.VISIBLE
         airLocation.start()
 
-        val intent = Intent(this, ResultActivity::class.java)
-        //intent.putExtra("City", "Darmstadt")
+        val intent = Intent(this, StartActivity::class.java)
         Timer("nextAct", false).schedule(3000){
-            /*if (cityName == "NaN")
-                Timer("nextAct", false).schedule(3000){
-                    //DO NOTHING
-                    intent.putExtra("City",cityName)
-                }*/
             intent.putExtra("City", cityName)
             println("TEST IN MAIN: " + intent.getStringExtra("City"))
             startActivity(intent)
         }
-
-        /*
-        button3.setOnClickListener {
-            val intent = Intent(this, StartActivity::class.java)
-            startActivity(intent)
-        }
-        */
 
     }
 
