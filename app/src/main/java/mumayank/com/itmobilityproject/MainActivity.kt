@@ -4,12 +4,8 @@ import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.SearchView
 import kotlinx.android.synthetic.main.main_activity.*
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.*
@@ -32,14 +28,14 @@ class MainActivity : AppCompatActivity() {
 
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
-            cityName = geocoder.getFromLocation(lat, long, 1)[0].locality
-            println(cityName)
+            nextActivity()
         }
 
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
             //progressBar.visibility = View.GONE
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
+            nextActivity()
         }
     }/*, isLocationRequiredOnlyOneTime = true*/)
 
@@ -51,13 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         //progressBar.visibility = View.VISIBLE
         airLocation.start()
-
-        val intent = Intent(this, StartActivity::class.java)
-        Timer("nextAct", false).schedule(3000){
-            intent.putExtra("City", cityName)
-            println("TEST IN MAIN: " + intent.getStringExtra("City"))
-            startActivity(intent)
-        }
 
     }
 
@@ -73,6 +62,26 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun nextActivity(){
+
+        if (!lat.equals(0.0) && !long.equals(0.0)){
+            cityName = geocoder.getFromLocation(lat, long, 1)[0].locality
+        }
+
+        Timer("nextAct", false).schedule(2000){
+            if(cityName != "NaN"){
+                val intent = Intent(this@MainActivity, StartActivity::class.java)
+                intent.putExtra("City", cityName)
+                startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this@MainActivity, SelectCityActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     /*
