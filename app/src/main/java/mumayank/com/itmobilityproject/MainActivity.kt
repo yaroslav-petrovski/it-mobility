@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             if(cityName != "NaN"){
                 val intent = Intent(this@MainActivity, StartActivity::class.java)
                 intent.putExtra("City", cityName)
-                intent.putExtra("Product", "Wasserkocher")
                 startActivity(intent)
                 //finish()
             } else {

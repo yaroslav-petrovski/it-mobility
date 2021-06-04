@@ -1,13 +1,17 @@
 package mumayank.com.itmobilityproject
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {
+
+    //val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
 
     // Variables for DB Request
     var cityName = "NaN"
@@ -24,9 +28,15 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
+        val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
+
         // Get city from previous Activity
         cityName = intent.getStringExtra("City").toString()
         productName = intent.getStringExtra("Product").toString()
+        if (productName == "NaN") {
+            productName = sharedPref.getString("Product", "NaN").toString()
+            results_text.text = "Results may be not actual!"
+        }
 
         // Cities node in the DB
         database = FirebaseDatabase.getInstance()
@@ -51,13 +61,22 @@ class ResultActivity : AppCompatActivity() {
                         val productCnt = it.child("Products").child(productName).value.toString().toInt()
                         shops.add(ResultItem(it.key.toString(), productCnt))
                     }
+                    if (shops.isEmpty()){
+                        val message = "No " + productName + "found:("
+                        results_text.text = message
+                    } else {
+
+                        val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
+
+                        with(sharedPref.edit()){
+                            putString("Product", productName)
+                            apply()
+                        }
+
+                    }
                 } else {
-                    println("CHILD DOES NOT EXIST")
-                    Toast.makeText(
-                        applicationContext,
-                        "There are no sops in $cityName",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    val message = "There are no shops in " + cityName + ":("
+                    results_text.text = message
                 }
 
                 // Show Shops in th listview
