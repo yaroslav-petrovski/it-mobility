@@ -11,7 +11,7 @@ class ResultActivity : AppCompatActivity() {
 
     // Variables for DB Request
     var cityName = "NaN"
-    var productName = "Mikrowelle"
+    var productName = "NaN"
 
     // List to store results
     var shops = mutableListOf<ResultItem>()
@@ -26,10 +26,13 @@ class ResultActivity : AppCompatActivity() {
 
         // Get city from previous Activity
         cityName = intent.getStringExtra("City").toString()
+        productName = intent.getStringExtra("Product").toString()
 
         // Cities node in the DB
         database = FirebaseDatabase.getInstance()
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         reference = database.getReference("cities")
+        reference.keepSynced(true)
 
         getData()
 
@@ -38,6 +41,9 @@ class ResultActivity : AppCompatActivity() {
     private fun getData() {
         reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                shops.clear()
+
                 // Check if the city exists in the DB
                 if (snapshot.hasChild(cityName)) {
                     // Store shops in th list
@@ -59,7 +65,7 @@ class ResultActivity : AppCompatActivity() {
                 var mListView = findViewById<ListView>(R.id.results_list)
                 shops.sortWith(compareByDescending { it.cntProducts })
                 //arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, shops)
-                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops, productName)
                 mListView.adapter = arrayAdapter
             }
 

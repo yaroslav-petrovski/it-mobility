@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class ResultListAdapter(private val context: Activity, private val items: MutableList<ResultItem>)
+class ResultListAdapter(private val context: Activity, private val items: MutableList<ResultItem>, private val city: String)
     : ArrayAdapter<ResultItem>(context, R.layout.list_row, items) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
@@ -18,7 +18,7 @@ class ResultListAdapter(private val context: Activity, private val items: Mutabl
         val cntText = rowView.findViewById(R.id.cnt) as TextView
 
         adressText.text = items[position].Adress
-        productText.text = "TEST"
+        productText.text = city
         cntText.text = items[position].cntProducts.toString()
 
         return rowView
