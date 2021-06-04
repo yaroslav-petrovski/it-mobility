@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.main_activity.*
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.*
@@ -46,6 +47,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        //In the first Activity because can be set one time
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         //progressBar.visibility = View.VISIBLE
         airLocation.start()

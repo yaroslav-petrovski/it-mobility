@@ -1,17 +1,15 @@
 package mumayank.com.itmobilityproject
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {
-
-    //val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
 
     // Variables for DB Request
     var cityName = "NaN"
@@ -28,9 +26,11 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
+
+        //Shared preferences for last search
         val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
 
-        // Get city from previous Activity
+        // Get city from previous Activity or shared preferences
         cityName = intent.getStringExtra("City").toString()
         productName = intent.getStringExtra("Product").toString()
         if (productName == "NaN") {
@@ -38,9 +38,9 @@ class ResultActivity : AppCompatActivity() {
             results_text.text = "Results may be not actual!"
         }
 
-        // Cities node in the DB
+        // Cities node in the DB (Persistence is enabled in MainActivity)
         database = FirebaseDatabase.getInstance()
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         reference = database.getReference("cities")
         reference.keepSynced(true)
 
@@ -56,23 +56,23 @@ class ResultActivity : AppCompatActivity() {
 
                 // Check if the city exists in the DB
                 if (snapshot.hasChild(cityName)) {
-                    // Store shops in th list
+                    // Store shops in th list (if the city exists)
                     snapshot.child(cityName).children.first().children.forEach {
-                        val productCnt = it.child("Products").child(productName).value.toString().toInt()
-                        shops.add(ResultItem(it.key.toString(), productCnt))
-                    }
-                    if (shops.isEmpty()){
-                        val message = "No " + productName + "found:("
-                        results_text.text = message
-                    } else {
+                        //show product if exists
+                        if(it.child("Products").hasChild(productName)){
+                            val productCnt = it.child("Products").child(productName).value.toString().toInt()
+                            shops.add(ResultItem(it.key.toString(), productCnt))
 
-                        val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
+                            val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
 
-                        with(sharedPref.edit()){
-                            putString("Product", productName)
-                            apply()
+                            with(sharedPref.edit()){
+                                putString("Product", productName)
+                                apply()
+                            }
+                        } else {
+                            val message = "No " + productName + " found:("
+                            results_text.text = message
                         }
-
                     }
                 } else {
                     val message = "There are no shops in " + cityName + ":("
@@ -90,10 +90,17 @@ class ResultActivity : AppCompatActivity() {
 
             // When DB-Error
             override fun onCancelled(error: DatabaseError) {
-                println("Cancelled (DatabaseError)")
+                results_text.text = "Database error:("
             }
         })
 
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this@ResultActivity, StartActivity::class.java)
+        intent.putExtra("City", cityName)
+        startActivity(intent)
+        finish()
     }
 
 }

@@ -21,7 +21,7 @@ class StartActivity : AppCompatActivity() {
         btnQR.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("City", city)
-            intent.putExtra("Product", "Toaster")
+            intent.putExtra("Product", "Mikrowelle")
             startActivity(intent)
         }
 
