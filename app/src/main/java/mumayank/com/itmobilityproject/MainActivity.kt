@@ -1,15 +1,14 @@
 package mumayank.com.itmobilityproject
 
+import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
+import android.net.ConnectivityManager
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.SearchView
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.main_activity.*
 import mumayank.com.airlocationlibrary.AirLocation
 import java.util.*
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     var lat = 0.0
     var long = 0.0
     val geocoder = Geocoder(this)
+    var cityName = "NaN"
 
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
         override fun onSuccess(locations: ArrayList<Location>) {
@@ -31,15 +31,14 @@ class MainActivity : AppCompatActivity() {
 
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
-            var string = geocoder.getFromLocation(lat, long, 1)[0].locality
-            //textView2.text = string
-            println(string)
+            nextActivity()
         }
 
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
             //progressBar.visibility = View.GONE
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
+            nextActivity()
         }
     }/*, isLocationRequiredOnlyOneTime = true*/)
 
@@ -49,20 +48,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        //In the first Activity because can be set one time
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+
         //progressBar.visibility = View.VISIBLE
         airLocation.start()
-
-        val intent = Intent(this, StartActivity::class.java)
-        Timer("nextAct", false).schedule(3000){
-            startActivity(intent)
-        }
-
-        /*
-        button3.setOnClickListener {
-            val intent = Intent(this, StartActivity::class.java)
-            startActivity(intent)
-        }
-        */
 
     }
 
@@ -78,6 +68,32 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun nextActivity(){
+
+        if (!lat.equals(0.0) && !long.equals(0.0)){
+            cityName = geocoder.getFromLocation(lat, long, 1)[0].locality
+        }
+
+        Timer("nextAct", false).schedule(2000){
+            if(cityName != "NaN"){
+                val intent = Intent(this@MainActivity, StartActivity::class.java)
+                intent.putExtra("City", cityName)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                overridePendingTransition(0, 0)
+            } else {
+                val intent = Intent(this@MainActivity, SelectCityActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                overridePendingTransition(0, 0)
+            }
+        }
     }
 
     /*

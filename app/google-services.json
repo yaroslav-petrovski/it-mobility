@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "589336972019",
+    "firebase_url": "https://it-mobility-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "it-mobility",
+    "storage_bucket": "it-mobility.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589336972019:android:20b8346533ba569f928586",
+        "android_client_info": {
+          "package_name": "mumayank.com.airlocationproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589336972019-boilphcpa5grt4l0rq3t6lnslbgc5k88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHSAsoC7uPIscXJwcFriPcNye4iKerSGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589336972019-boilphcpa5grt4l0rq3t6lnslbgc5k88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
