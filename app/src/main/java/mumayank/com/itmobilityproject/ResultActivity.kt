@@ -99,8 +99,12 @@ class ResultActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val intent = Intent(this@ResultActivity, StartActivity::class.java)
         intent.putExtra("City", cityName)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+        overridePendingTransition(0, 0)
     }
 
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_start.*
+import kotlin.system.exitProcess
 
 class StartActivity : AppCompatActivity() {
 
@@ -23,6 +24,7 @@ class StartActivity : AppCompatActivity() {
             intent.putExtra("City", city)
             intent.putExtra("Product", "Mikrowelle")
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         btnPrevSearch.setOnClickListener {
@@ -30,7 +32,13 @@ class StartActivity : AppCompatActivity() {
             intent.putExtra("City", city)
             intent.putExtra("Product", "NaN")
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        return
     }
 
 }
