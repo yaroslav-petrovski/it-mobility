@@ -2,10 +2,13 @@ package mumayank.com.itmobilityproject
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_result.*
 
@@ -26,6 +29,7 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
+        var mListView = findViewById<ListView>(R.id.results_list)
 
         //Shared preferences for last search
         val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
@@ -46,11 +50,30 @@ class ResultActivity : AppCompatActivity() {
 
         getData()
 
+        mListView.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
+            val selectedItem = parent.getItemAtPosition(position) as ResultItem
+            /*Toast.makeText(this@ResultActivity, selectedItem.lat.toString(), Toast.LENGTH_SHORT)
+                .show()*/
+            val gmmIntentUri = Uri.parse("geo:"
+                    +selectedItem.lat.toString()+","
+                    +selectedItem.long.toString()
+                    +"?q="+selectedItem.lat.toString()+","
+                    +selectedItem.long.toString()+"(Label+Name)"
+            )
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            mapIntent.resolveActivity(packageManager)?.let {
+                startActivity(mapIntent)
+            }
+        }
+
     }
 
     private fun getData() {
         reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                var mListView = findViewById<ListView>(R.id.results_list)
 
                 shops.clear()
 
@@ -61,7 +84,9 @@ class ResultActivity : AppCompatActivity() {
                         //show product if exists
                         if(it.child("Products").hasChild(productName)){
                             val productCnt = it.child("Products").child(productName).value.toString().toInt()
-                            shops.add(ResultItem(it.key.toString(), productCnt))
+                            val lat = it.child("lat").value.toString().toFloat()
+                            val long = it.child("lon").value.toString().toFloat()
+                            shops.add(ResultItem(it.key.toString(), productCnt, lat, long))
 
                             val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
 
@@ -70,18 +95,18 @@ class ResultActivity : AppCompatActivity() {
                                 apply()
                             }
                         } else {
-                            val message = "No " + productName + " found:("
+                            val message = "No $productName found:("
                             results_text.text = message
                         }
                     }
                 } else {
-                    val message = "There are no shops in " + cityName + ":("
+                    val message = "There are no shops in $cityName:("
                     results_text.text = message
                 }
 
                 // Show Shops in th listview
                 val arrayAdapter: ArrayAdapter<*>
-                var mListView = findViewById<ListView>(R.id.results_list)
+                mListView = findViewById<ListView>(R.id.results_list)
                 shops.sortWith(compareByDescending { it.cntProducts })
                 //arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, shops)
                 arrayAdapter = ResultListAdapter(this@ResultActivity, shops, productName)

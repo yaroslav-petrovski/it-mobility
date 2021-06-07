@@ -1,15 +1,19 @@
 package mumayank.com.itmobilityproject
 
-import android.content.Context
+import android.app.Service
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_start.*
-import kotlin.system.exitProcess
 
 class StartActivity : AppCompatActivity() {
 
     var city = "NaN"
+
+    //var context = this
+    //var connectivity : ConnectivityManager? = null
+    //var info : NetworkInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +22,13 @@ class StartActivity : AppCompatActivity() {
         city = intent.getStringExtra("City").toString()
 
         cityName.text = city
+
+        val connectivity = this.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivity.activeNetworkInfo
+        btnQR.isEnabled = networkInfo != null && networkInfo.isConnected == true
+        if(!btnQR.isEnabled){
+            btnQR.background = resources.getDrawable(R.drawable.button_shape_enabled)
+        }
 
         btnQR.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
