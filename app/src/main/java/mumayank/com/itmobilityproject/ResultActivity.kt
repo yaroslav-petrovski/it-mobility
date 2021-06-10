@@ -50,6 +50,8 @@ class ResultActivity : AppCompatActivity() {
             results_text.text = "Results may be not actual!"
         }
 
+        title = productName
+
         // Cities node in the DB (Persistence is enabled in MainActivity)
         database = FirebaseDatabase.getInstance()
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
@@ -148,9 +150,21 @@ class ResultActivity : AppCompatActivity() {
         //return super.onOptionsItemSelected(item)
         return when (item.itemId){
             R.id.sortByCnt -> {
+                var mListView = findViewById<ListView>(R.id.results_list)
+                val arrayAdapter: ArrayAdapter<*>
+                mListView = findViewById<ListView>(R.id.results_list)
+                shops.sortWith(compareByDescending { it.cntProducts })
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
+                mListView.adapter = arrayAdapter
                 return true
             }
             R.id.sortByDistance -> {
+                var mListView = findViewById<ListView>(R.id.results_list)
+                val arrayAdapter: ArrayAdapter<*>
+                mListView = findViewById<ListView>(R.id.results_list)
+                shops.sortWith(compareBy { it.distanceToUser })
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
+                mListView.adapter = arrayAdapter
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -160,6 +174,8 @@ class ResultActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val intent = Intent(this@ResultActivity, StartActivity::class.java)
         intent.putExtra("City", cityName)
+        intent.putExtra("Lat", latUser)
+        intent.putExtra("Lon", lonUser)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
