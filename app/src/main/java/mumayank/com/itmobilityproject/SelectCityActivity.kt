@@ -23,6 +23,8 @@ class SelectCityActivity : AppCompatActivity() {
     private fun nextActivity(cityName: String){
         val intent = Intent(this, StartActivity::class.java)
         intent.putExtra("City", cityName)
+        intent.putExtra("Lat", 0.0)
+        intent.putExtra("Lon", 0.0)
         /*intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)*/

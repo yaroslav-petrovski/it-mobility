@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     //VARIABLES:
     var lat = 0.0
     var long = 0.0
+    //lateinit var location: Location
     val geocoder = Geocoder(this)
     var cityName = "NaN"
 
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         override fun onSuccess(locations: ArrayList<Location>) {
             //progressBar.visibility = View.GONE
 
+            //location = locations.last()
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
             nextActivity()
@@ -78,6 +80,8 @@ class MainActivity : AppCompatActivity() {
             if(cityName != "NaN"){
                 val intent = Intent(this@MainActivity, StartActivity::class.java)
                 intent.putExtra("City", cityName)
+                intent.putExtra("Lat", lat)
+                intent.putExtra("Lon", long)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

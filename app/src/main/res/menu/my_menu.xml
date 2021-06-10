@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/search"
+    <!--<item android:id="@+id/search"
             android:title="Search"
             android:icon="@drawable/ic_search"
             app:showAsAction="collapseActionView|ifRoom"
@@ -11,6 +11,14 @@
     <item android:id="@+id/location_search"
         android:title="LocationSearch"
         android:icon="@drawable/ic_location_searching"
-        app:showAsAction="collapseActionView|ifRoom" />
+        app:showAsAction="collapseActionView|ifRoom" />-->
+
+    <item android:id="@+id/sortByCnt"
+            android:title="Sort by number of products"
+            app:showAsAction="collapseActionView" />
+
+    <item android:id="@+id/sortByDistance"
+            android:title="Sort by distance"
+            app:showAsAction="collapseActionView" />
 
 </menu>
