@@ -10,6 +10,8 @@ import kotlinx.android.synthetic.main.activity_start.*
 class StartActivity : AppCompatActivity() {
 
     var city = "NaN"
+    var lat = 0.0
+    var lon = 0.0
 
     //var context = this
     //var connectivity : ConnectivityManager? = null
@@ -20,6 +22,9 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         city = intent.getStringExtra("City").toString()
+        lat = intent.getDoubleExtra("Lat", 0.0)
+        lon = intent.getDoubleExtra("Lon", 0.0)
+
 
         cityName.text = city
 
@@ -34,6 +39,8 @@ class StartActivity : AppCompatActivity() {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("City", city)
             intent.putExtra("Product", "Mikrowelle")
+            intent.putExtra("Lat", lat)
+            intent.putExtra("Lon", lon)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
@@ -42,6 +49,8 @@ class StartActivity : AppCompatActivity() {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("City", city)
             intent.putExtra("Product", "NaN")
+            intent.putExtra("Lat", lat)
+            intent.putExtra("Lon", lon)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }

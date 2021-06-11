@@ -2,9 +2,12 @@ package mumayank.com.itmobilityproject
 
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -16,6 +19,8 @@ class ResultActivity : AppCompatActivity() {
 
     // Variables for DB Request
     var cityName = "NaN"
+    var latUser = 0.0
+    var lonUser = 0.0
     var productName = "NaN"
 
     // List to store results
@@ -37,10 +42,15 @@ class ResultActivity : AppCompatActivity() {
         // Get city from previous Activity or shared preferences
         cityName = intent.getStringExtra("City").toString()
         productName = intent.getStringExtra("Product").toString()
+        latUser = intent.getDoubleExtra("Lat", 0.0)
+        lonUser = intent.getDoubleExtra("Lon", 0.0)
+
         if (productName == "NaN") {
             productName = sharedPref.getString("Product", "NaN").toString()
             results_text.text = "Results may be not actual!"
         }
+
+        title = productName
 
         // Cities node in the DB (Persistence is enabled in MainActivity)
         database = FirebaseDatabase.getInstance()
@@ -73,6 +83,11 @@ class ResultActivity : AppCompatActivity() {
         reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
+                val locationUser = Location("dummyprovider")
+                locationUser.latitude = latUser
+                locationUser.longitude = lonUser
+                val locationShop = Location("dummyprovider")
+
                 var mListView = findViewById<ListView>(R.id.results_list)
 
                 shops.clear()
@@ -84,9 +99,15 @@ class ResultActivity : AppCompatActivity() {
                         //show product if exists
                         if(it.child("Products").hasChild(productName)){
                             val productCnt = it.child("Products").child(productName).value.toString().toInt()
-                            val lat = it.child("lat").value.toString().toFloat()
-                            val long = it.child("lon").value.toString().toFloat()
-                            shops.add(ResultItem(it.key.toString(), productCnt, lat, long))
+                            val lat = it.child("lat").value.toString().toDouble()
+                            val long = it.child("lon").value.toString().toDouble()
+                            locationShop.latitude = lat
+                            locationShop.longitude = long
+                            var distanceToUser = locationShop.distanceTo(locationUser)
+                            if (locationUser.latitude == 0.0)
+                                distanceToUser = 0.0F
+
+                            shops.add(ResultItem(it.key.toString(), productCnt, lat, long, distanceToUser))
 
                             val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
 
@@ -104,12 +125,11 @@ class ResultActivity : AppCompatActivity() {
                     results_text.text = message
                 }
 
-                // Show Shops in th listview
+                // Show Shops in the listview
                 val arrayAdapter: ArrayAdapter<*>
                 mListView = findViewById<ListView>(R.id.results_list)
-                shops.sortWith(compareByDescending { it.cntProducts })
-                //arrayAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, shops)
-                arrayAdapter = ResultListAdapter(this@ResultActivity, shops, productName)
+                shops.sortWith(compareBy { it.distanceToUser })
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
                 mListView.adapter = arrayAdapter
             }
 
@@ -121,9 +141,41 @@ class ResultActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.my_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //return super.onOptionsItemSelected(item)
+        return when (item.itemId){
+            R.id.sortByCnt -> {
+                var mListView = findViewById<ListView>(R.id.results_list)
+                val arrayAdapter: ArrayAdapter<*>
+                mListView = findViewById<ListView>(R.id.results_list)
+                shops.sortWith(compareByDescending { it.cntProducts })
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
+                mListView.adapter = arrayAdapter
+                return true
+            }
+            R.id.sortByDistance -> {
+                var mListView = findViewById<ListView>(R.id.results_list)
+                val arrayAdapter: ArrayAdapter<*>
+                mListView = findViewById<ListView>(R.id.results_list)
+                shops.sortWith(compareBy { it.distanceToUser })
+                arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
+                mListView.adapter = arrayAdapter
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onBackPressed() {
         val intent = Intent(this@ResultActivity, StartActivity::class.java)
         intent.putExtra("City", cityName)
+        intent.putExtra("Lat", latUser)
+        intent.putExtra("Lon", lonUser)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
