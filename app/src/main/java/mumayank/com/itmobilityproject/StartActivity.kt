@@ -36,7 +36,7 @@ class StartActivity : AppCompatActivity() {
         }
 
         btnQR.setOnClickListener {
-            val intent = Intent(this, ResultActivity::class.java)
+            val intent = Intent(this, QrScanActivity::class.java)
             intent.putExtra("City", city)
             intent.putExtra("Product", "Mikrowelle")
             intent.putExtra("Lat", lat)

@@ -6,4 +6,10 @@
         android:layout_height="match_parent"
         tools:context=".QrScanActivity">
 
+    <me.dm7.barcodescanner.zxing.ZXingScannerView
+            android:id="@+id/qrCodeScanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    </me.dm7.barcodescanner.zxing.ZXingScannerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

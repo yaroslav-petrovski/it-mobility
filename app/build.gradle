@@ -26,4 +26,6 @@ dependencies {
     implementation project(":airlocationlibrary")
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-database:20.0.0'
+    // Zxing barcode dependency
+    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
 }
