@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_result.*
 
@@ -60,22 +59,24 @@ class ResultActivity : AppCompatActivity() {
 
         getData()
 
-        mListView.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
-            val selectedItem = parent.getItemAtPosition(position) as ResultItem
-            /*Toast.makeText(this@ResultActivity, selectedItem.lat.toString(), Toast.LENGTH_SHORT)
-                .show()*/
-            val gmmIntentUri = Uri.parse("geo:"
-                    +selectedItem.lat.toString()+","
-                    +selectedItem.long.toString()
-                    +"?q="+selectedItem.lat.toString()+","
-                    +selectedItem.long.toString()+"(Label+Name)"
-            )
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            mapIntent.resolveActivity(packageManager)?.let {
-                startActivity(mapIntent)
+        mListView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedItem = parent.getItemAtPosition(position) as ResultItem
+                /*Toast.makeText(this@ResultActivity, selectedItem.lat.toString(), Toast.LENGTH_SHORT)
+                    .show()*/
+                val gmmIntentUri = Uri.parse(
+                    "geo:"
+                            + selectedItem.lat.toString() + ","
+                            + selectedItem.long.toString()
+                            + "?q=" + selectedItem.lat.toString() + ","
+                            + selectedItem.long.toString() + "(Label+Name)"
+                )
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                mapIntent.resolveActivity(packageManager)?.let {
+                    startActivity(mapIntent)
+                }
             }
-        }
 
     }
 
@@ -97,8 +98,9 @@ class ResultActivity : AppCompatActivity() {
                     // Store shops in th list (if the city exists)
                     snapshot.child(cityName).children.first().children.forEach {
                         //show product if exists
-                        if(it.child("Products").hasChild(productName)){
-                            val productCnt = it.child("Products").child(productName).value.toString().toInt()
+                        if (it.child("Products").hasChild(productName)) {
+                            val productCnt =
+                                it.child("Products").child(productName).value.toString().toInt()
                             val lat = it.child("lat").value.toString().toDouble()
                             val long = it.child("lon").value.toString().toDouble()
                             locationShop.latitude = lat
@@ -107,11 +109,20 @@ class ResultActivity : AppCompatActivity() {
                             if (locationUser.latitude == 0.0)
                                 distanceToUser = 0.0F
 
-                            shops.add(ResultItem(it.key.toString(), productCnt, lat, long, distanceToUser))
+                            shops.add(
+                                ResultItem(
+                                    it.key.toString(),
+                                    productCnt,
+                                    lat,
+                                    long,
+                                    distanceToUser
+                                )
+                            )
 
-                            val sharedPref = this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
+                            val sharedPref =
+                                this@ResultActivity.getPreferences(Context.MODE_PRIVATE)
 
-                            with(sharedPref.edit()){
+                            with(sharedPref.edit()) {
                                 putString("Product", productName)
                                 apply()
                             }
@@ -148,7 +159,7 @@ class ResultActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //return super.onOptionsItemSelected(item)
-        return when (item.itemId){
+        return when (item.itemId) {
             R.id.sortByCnt -> {
                 var mListView = findViewById<ListView>(R.id.results_list)
                 val arrayAdapter: ArrayAdapter<*>

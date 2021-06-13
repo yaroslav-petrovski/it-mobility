@@ -13,13 +13,11 @@ class StartActivity : AppCompatActivity() {
     var lat = 0.0
     var lon = 0.0
 
-    //var context = this
-    //var connectivity : ConnectivityManager? = null
-    //var info : NetworkInfo? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
+
+        title = "LIDL APP 2.0"
 
         city = intent.getStringExtra("City").toString()
         lat = intent.getDoubleExtra("Lat", 0.0)
@@ -28,15 +26,16 @@ class StartActivity : AppCompatActivity() {
 
         cityName.text = city
 
-        val connectivity = this.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivity =
+            this.getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivity.activeNetworkInfo
         btnQR.isEnabled = networkInfo != null && networkInfo.isConnected == true
-        if(!btnQR.isEnabled){
+        if (!btnQR.isEnabled) {
             btnQR.background = resources.getDrawable(R.drawable.button_shape_enabled)
         }
 
         btnQR.setOnClickListener {
-            val intent = Intent(this, ResultActivity::class.java)
+            val intent = Intent(this, QrScanActivity::class.java)
             intent.putExtra("City", city)
             intent.putExtra("Product", "Mikrowelle")
             intent.putExtra("Lat", lat)

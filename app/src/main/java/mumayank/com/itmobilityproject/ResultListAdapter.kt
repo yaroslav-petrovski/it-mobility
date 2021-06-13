@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class ResultListAdapter(private val context: Activity, private val items: MutableList<ResultItem>)
-    : ArrayAdapter<ResultItem>(context, R.layout.list_row, items) {
+class ResultListAdapter(private val context: Activity, private val items: MutableList<ResultItem>) :
+    ArrayAdapter<ResultItem>(context, R.layout.list_row, items) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
@@ -24,7 +24,7 @@ class ResultListAdapter(private val context: Activity, private val items: Mutabl
 
         if (items[position].distanceToUser == 0.0F)
             distText.visibility = View.INVISIBLE
-        val stringForDistText = String.format("%.2f", items[position].distanceToUser/1000) + " km"
+        val stringForDistText = String.format("%.2f", items[position].distanceToUser / 1000) + " km"
         distText.text = stringForDistText
 
         return rowView

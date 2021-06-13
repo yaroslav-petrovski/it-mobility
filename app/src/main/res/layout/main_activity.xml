@@ -15,25 +15,10 @@
 
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="380dp"
-                android:paddingBottom="50dp"
-                android:src="@drawable/images" />
+                android:layout_height="175dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/lidl_logo" />
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wilkommen auf der Lidl Aktionsapp"
-                android:textSize="40dp"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-        <ProgressBar
-                android:id="@+id/splashProgress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp" />
 
     </LinearLayout>
 

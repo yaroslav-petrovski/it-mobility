@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     //VARIABLES:
     var lat = 0.0
     var long = 0.0
+
     //lateinit var location: Location
     val geocoder = Geocoder(this)
     var cityName = "NaN"
@@ -28,14 +29,12 @@ class MainActivity : AppCompatActivity() {
         override fun onSuccess(locations: ArrayList<Location>) {
             //progressBar.visibility = View.GONE
 
-            //location = locations.last()
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
             nextActivity()
         }
 
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
-            //progressBar.visibility = View.GONE
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
             nextActivity()
@@ -48,10 +47,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        this.supportActionBar?.hide()
+
         //In the first Activity because can be set one time
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
-        //progressBar.visibility = View.VISIBLE
         airLocation.start()
 
     }
@@ -70,14 +70,14 @@ class MainActivity : AppCompatActivity() {
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun nextActivity(){
+    private fun nextActivity() {
 
-        if (!lat.equals(0.0) && !long.equals(0.0)){
+        if (!lat.equals(0.0) && !long.equals(0.0)) {
             cityName = geocoder.getFromLocation(lat, long, 1)[0].locality
         }
 
-        Timer("nextAct", false).schedule(2000){
-            if(cityName != "NaN"){
+        Timer("nextAct", false).schedule(2000) {
+            if (cityName != "NaN") {
                 val intent = Intent(this@MainActivity, StartActivity::class.java)
                 intent.putExtra("City", cityName)
                 intent.putExtra("Lat", lat)
@@ -97,31 +97,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    /*
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
-        menuInflater.inflate(R.menu.my_menu, menu)
-        val search = menu.findItem(R.id.search)
-        val searchView = search.actionView as SearchView
-        searchView.queryHint = "Your city..."
-
-        return true
-    }
-    */
-
-    /*
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //return super.onOptionsItemSelected(item)
-        return when (item.itemId){
-            R.id.location_search -> {
-                progressBar.visibility = View.VISIBLE
-                airLocation.start()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-    */
 
 }
