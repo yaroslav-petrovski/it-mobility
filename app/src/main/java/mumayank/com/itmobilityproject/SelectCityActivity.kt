@@ -14,7 +14,6 @@ class SelectCityActivity : AppCompatActivity() {
         getCityName.setOnClickListener {
             var cityName = CityEditText.text.toString()
             Toast.makeText(this, cityName, Toast.LENGTH_SHORT).show()
-            //println("TESTTEST____$cityName")
             nextActivity(cityName)
 
         }

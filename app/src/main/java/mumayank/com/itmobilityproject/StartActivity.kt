@@ -13,10 +13,6 @@ class StartActivity : AppCompatActivity() {
     var lat = 0.0
     var lon = 0.0
 
-    //var context = this
-    //var connectivity : ConnectivityManager? = null
-    //var info : NetworkInfo? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)

@@ -42,7 +42,7 @@
             android:layout_height="150dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_shape"
-            android:text="VIEW PREVIOUS SEARCH"
+            android:text="VIEW LAST SEARCH"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
 
