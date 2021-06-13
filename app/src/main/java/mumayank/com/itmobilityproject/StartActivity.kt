@@ -17,6 +17,8 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
+        title="LIDL APP 2.0"
+
         city = intent.getStringExtra("City").toString()
         lat = intent.getDoubleExtra("Lat", 0.0)
         lon = intent.getDoubleExtra("Lon", 0.0)

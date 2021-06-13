@@ -57,7 +57,6 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     override fun handleResult(p0: Result?) {
         if (p0 != null) {
             product = p0.text
-            Toast.makeText(this,product,Toast.LENGTH_LONG).show()
             resumeCamera()
             nextActivity()
         }
@@ -68,7 +67,7 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         qrCodeScanner.stopCamera()
     }
 
-    fun nextActivity(){
+    private fun nextActivity(){
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("City", city)
         intent.putExtra("Product", product)

@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        this.supportActionBar?.hide()
+
         //In the first Activity because can be set one time
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
