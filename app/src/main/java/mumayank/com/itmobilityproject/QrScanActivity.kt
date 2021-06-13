@@ -25,6 +25,8 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_scan)
 
+        title = "LIDL APP 2.0"
+
         city = intent.getStringExtra("City").toString()
         lat = intent.getDoubleExtra("Lat", 0.0)
         lon = intent.getDoubleExtra("Lon", 0.0)
@@ -45,8 +47,10 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         super.onResume()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
-                    6515)
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(Manifest.permission.CAMERA),
+                    6515
+                )
                 return
             }
         }
@@ -67,7 +71,7 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         qrCodeScanner.stopCamera()
     }
 
-    private fun nextActivity(){
+    private fun nextActivity() {
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("City", city)
         intent.putExtra("Product", product)

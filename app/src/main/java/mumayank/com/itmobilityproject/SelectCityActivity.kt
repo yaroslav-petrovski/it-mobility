@@ -15,7 +15,7 @@ class SelectCityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_city)
 
-        title="LIDL APP 2.0"
+        title = "LIDL APP 2.0"
 
         var database = FirebaseDatabase.getInstance()
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
@@ -36,7 +36,7 @@ class SelectCityActivity : AppCompatActivity() {
                 citiesArray.clear()
             }
         })
-        
+
 
         val adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, citiesArray)

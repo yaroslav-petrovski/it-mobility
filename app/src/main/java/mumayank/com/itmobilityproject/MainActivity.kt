@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     //VARIABLES:
     var lat = 0.0
     var long = 0.0
+
     //lateinit var location: Location
     val geocoder = Geocoder(this)
     var cityName = "NaN"
@@ -69,14 +70,14 @@ class MainActivity : AppCompatActivity() {
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun nextActivity(){
+    private fun nextActivity() {
 
-        if (!lat.equals(0.0) && !long.equals(0.0)){
+        if (!lat.equals(0.0) && !long.equals(0.0)) {
             cityName = geocoder.getFromLocation(lat, long, 1)[0].locality
         }
 
-        Timer("nextAct", false).schedule(2000){
-            if(cityName != "NaN"){
+        Timer("nextAct", false).schedule(2000) {
+            if (cityName != "NaN") {
                 val intent = Intent(this@MainActivity, StartActivity::class.java)
                 intent.putExtra("City", cityName)
                 intent.putExtra("Lat", lat)
