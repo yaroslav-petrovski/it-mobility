@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--<item android:id="@+id/search"
             android:title="Search"
@@ -13,12 +13,41 @@
         android:icon="@drawable/ic_location_searching"
         app:showAsAction="collapseActionView|ifRoom" />-->
 
-    <item android:id="@+id/sortByCnt"
-            android:title="Sort by number of products"
-            app:showAsAction="collapseActionView" />
+    <item
+            android:id="@+id/buyOnlineMenu"
+            android:icon="@drawable/ic_baseline_shop_24"
+            app:showAsAction="collapseActionView|ifRoom"
+            android:title="BuyOnline">
 
-    <item android:id="@+id/sortByDistance"
-            android:title="Sort by distance"
-            app:showAsAction="collapseActionView" />
+        <menu>
+
+            <item
+                    android:id="@+id/buyOnline"
+                    android:title="Buy online"
+                    app:showAsAction="collapseActionView" />
+
+        </menu>
+    </item>
+
+    <item
+            android:id="@+id/location_search"
+            android:icon="@drawable/ic_baseline_sort_24"
+            app:showAsAction="collapseActionView|ifRoom"
+            android:title="Sorting">
+
+        <menu>
+
+            <item
+                    android:id="@+id/sortByCnt"
+                    android:title="Sort by number of products"
+                    app:showAsAction="collapseActionView" />
+
+            <item
+                    android:id="@+id/sortByDistance"
+                    android:title="Sort by distance"
+                    app:showAsAction="collapseActionView" />
+        </menu>
+    </item>
+
 
 </menu>

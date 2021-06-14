@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_result.*
 
@@ -176,6 +176,12 @@ class ResultActivity : AppCompatActivity() {
                 shops.sortWith(compareBy { it.distanceToUser })
                 arrayAdapter = ResultListAdapter(this@ResultActivity, shops)
                 mListView.adapter = arrayAdapter
+                return true
+            }
+            R.id.buyOnline -> {
+                val lidlString = "https://www.lidl.de/de/search?query=$productName"
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(lidlString))
+                startActivity(browserIntent)
                 return true
             }
             else -> super.onOptionsItemSelected(item)
