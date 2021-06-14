@@ -15,25 +15,58 @@ import kotlin.concurrent.schedule
 
 //using AirLocation library: https://github.com/mumayank/AirLocation
 
+/**
+ * Main activity
+ *
+ * Activity to show the logo and determine position
+ */
 class MainActivity : AppCompatActivity() {
 
-    //VARIABLES:
+    /**
+     * Lat
+     * Latitude
+     */
     var lat = 0.0
+
+    /**
+     * Long
+     * Longitude
+     */
     var long = 0.0
 
-    //lateinit var location: Location
+    /**
+     * Geocoder
+     * Geocoder to determine city name
+     */
     val geocoder = Geocoder(this)
+
+    /**
+     * City name
+     * The name of the city of user
+     */
     var cityName = "NaN"
 
+    /**
+     * Air location
+     * The object from Airlocation library to determine location
+     */
     private val airLocation = AirLocation(this, object : AirLocation.Callback {
+        /**
+         * On success
+         * if location determination was successful go to the next activity
+         * @param locations the list of locations
+         */
         override fun onSuccess(locations: ArrayList<Location>) {
-            //progressBar.visibility = View.GONE
-
             lat = locations.last().latitude.toDouble()
             long = locations.last().longitude.toDouble()
             nextActivity()
         }
 
+        /**
+         * On failure
+         * if no location determined go to next activity
+         * @param locationFailedEnum error text
+         */
         override fun onFailure(locationFailedEnum: AirLocation.LocationFailedEnum) {
             Toast.makeText(this@MainActivity, locationFailedEnum.name, Toast.LENGTH_SHORT)
                 .show()
@@ -42,25 +75,37 @@ class MainActivity : AppCompatActivity() {
     }/*, isLocationRequiredOnlyOneTime = true*/)
 
 
-    //FUNCTIONS
+    /**
+     * On create
+     * If activity created: hide action bar, enable database persistence, determine location
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
         this.supportActionBar?.hide()
 
-        //In the first Activity because can be set one time
+        //In the first Activity because can be set one time only
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         airLocation.start()
 
     }
 
+    /**
+     * On activity result
+     * Necessary for Airlocaton Library
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         airLocation.onActivityResult(requestCode, resultCode, data)
     }
 
+    /**
+     * On request permissions result
+     * Ask user to grant permissions
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -70,6 +115,13 @@ class MainActivity : AppCompatActivity() {
         airLocation.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    /**
+     * Next activity
+     * If location determined go to Start Activity (with city and positions as extra),
+     * if not go to Select City Activity
+     *
+     * The flags are used to clear history and not return to this activity
+     */
     private fun nextActivity() {
 
         if (!lat.equals(0.0) && !long.equals(0.0)) {
