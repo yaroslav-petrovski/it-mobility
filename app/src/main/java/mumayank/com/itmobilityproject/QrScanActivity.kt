@@ -14,19 +14,51 @@ import com.google.zxing.Result
 import kotlinx.android.synthetic.main.activity_qr_scan.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
+/**
+ * Qr scan activity
+ *
+ * Activity to scan QR-Code
+ * ZXing is used
+ */
 class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
+    /**
+     * City Name of the city
+     */
     var city = "NaN"
+
+    /**
+     * Product Name of the product
+     */
     var product = "NaN"
+
+    /**
+     * Lat Latitude
+     */
     var lat = 0.0
+
+    /**
+     * Lon Longitude
+     */
     var lon = 0.0
 
+    /**
+     * On create
+     *
+     * get extras and set QR-Scanner properties
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_scan)
 
+        /**
+         * Set layout title
+         */
         title = "LIDL APP 2.0"
 
+        /**
+         * Get extras from previous activity
+         */
         city = intent.getStringExtra("City").toString()
         lat = intent.getDoubleExtra("Lat", 0.0)
         lon = intent.getDoubleExtra("Lon", 0.0)
@@ -34,6 +66,11 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         setScannerProperties()
     }
 
+    /**
+     * Set scanner properties
+     *
+     * Set properties or the QR-Scanner
+     */
     private fun setScannerProperties() {
         qrCodeScanner.setFormats(listOf(BarcodeFormat.QR_CODE))
         qrCodeScanner.setAutoFocus(true)
@@ -43,6 +80,11 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
             qrCodeScanner.setAspectTolerance(0.5f)
     }
 
+    /**
+     * On resume
+     *
+     * Check permissions, start camera and handle QR-scanner results
+     */
     override fun onResume() {
         super.onResume()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -58,6 +100,11 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         qrCodeScanner.setResultHandler(this)
     }
 
+    /**
+     * Handle result
+     *
+     * Get product name from QR-Code and go to next activity
+     */
     override fun handleResult(p0: Result?) {
         if (p0 != null) {
             product = p0.text
@@ -66,11 +113,20 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         }
     }
 
+    /**
+     * On pause
+     * Stop camera on pause
+     */
     override fun onPause() {
         super.onPause()
         qrCodeScanner.stopCamera()
     }
 
+    /**
+     * Next activity
+     *
+     * go to the Result Activity and put position, product and city as extra
+     */
     private fun nextActivity() {
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("City", city)
@@ -81,6 +137,11 @@ class QrScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         overridePendingTransition(0, 0)
     }
 
+    /**
+     * Resume camera
+     *
+     * Initialize handler and resume camera view
+     */
     private fun resumeCamera() {
         Toast.LENGTH_LONG
         val handler = Handler()
