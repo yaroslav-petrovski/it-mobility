@@ -19,5 +19,4 @@ class ResultItem(
     val distanceToUser: Float
 ) {
 
-
 }

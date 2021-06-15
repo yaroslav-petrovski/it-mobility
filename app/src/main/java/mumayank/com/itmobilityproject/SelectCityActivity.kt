@@ -28,12 +28,12 @@ class SelectCityActivity : AppCompatActivity() {
         /**
          * Database Firebase
          */
-        var database = FirebaseDatabase.getInstance()
+        val database = FirebaseDatabase.getInstance()
 
         /**
          * Reference The cities node in the database
          */
-        var reference = database.getReference("cities")
+        val reference = database.getReference("cities")
         reference.keepSynced(true)
 
         /**
@@ -69,7 +69,7 @@ class SelectCityActivity : AppCompatActivity() {
          * After Ok button clicked: go to next activity
          */
         getCityName.setOnClickListener {
-            var cityName = CityEditText.text.toString()
+            val cityName = CityEditText.text.toString()
             nextActivity(cityName)
         }
     }
